@@ -27,10 +27,10 @@ export function LangSwitcher() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => switchLocale("pt")}>
-          🇧🇷 Português
+          Português-BR
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => switchLocale("en")}>
-          🇺🇸 English
+          English
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
