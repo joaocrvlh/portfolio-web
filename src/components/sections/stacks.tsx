@@ -36,6 +36,7 @@ const stackCategories = [
       { name: "Angular", slug: "angular" },
       { name: "Vue.js", slug: "vuedotjs" },
       { name: "Tailwind CSS", slug: "tailwindcss" },
+      { name: "ShadcnUI", slug: "shadcnui" },
     ],
   },
   {
