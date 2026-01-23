@@ -13,9 +13,9 @@ const stackCategories = [
       { name: "JavaScript", slug: "javascript" },
       { name: "TypeScript", slug: "typescript" },
       { name: "Python", slug: "python" },
+      { name: "Java", slug: "openjdk" },
       { name: "C", slug: "c" },
       { name: "Lua", slug: "lua" },
-      { name: "Java", slug: "openjdk" },
     ],
   },
   {
@@ -44,7 +44,7 @@ const stackCategories = [
       { name: "Node.js", slug: "nodedotjs" },
       { name: "Express", slug: "express" },
       { name: "NestJS", slug: "nestjs" },
-      { name: "FastAPI", slug: "fastapi" },
+      { name: "Flask", slug: "flask" },
     ],
   },
   {
@@ -90,26 +90,11 @@ function StackRow({
           >
             <div className="relative h-14 w-14 transition-transform duration-300 group-hover:scale-110">
               <Image
-                src={`https://cdn.simpleicons.org/${tech.slug}`}
+                src={`/images/${tech.slug}.svg`}
                 alt={tech.name}
                 fill
                 sizes="56px"
-                className={`object-contain ${
-                  [
-                    "nextdotjs",
-                    "github",
-                    "express",
-                    "expo",
-                    "gnubash",
-                    "nodedotjs",
-                    "openjdk",
-                    "angular",
-                    "lua",
-                    "sqlite",
-                  ].includes(tech.slug)
-                    ? "dark:invert"
-                    : ""
-                }`}
+                className="object-contain dark:invert"
               />
             </div>
             <span className="text-xs font-medium text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-5 whitespace-nowrap">
