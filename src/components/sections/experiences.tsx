@@ -15,18 +15,6 @@ export default function Experience() {
       date: t("items.0.date"),
       description: t("items.0.description"),
     },
-    {
-      role: t("items.1.role"),
-      company: t("items.1.company"),
-      date: t("items.1.date"),
-      description: t("items.1.description"),
-    },
-    {
-      role: t("items.2.role"),
-      company: t("items.2.company"),
-      date: t("items.2.date"),
-      description: t("items.2.description"),
-    },
   ];
 
   return (
