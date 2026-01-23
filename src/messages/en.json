@@ -1,0 +1,72 @@
+{
+  "Metadata": {
+    "title": "Jaum Dev",
+    "description": "Software Developer Portfolio"
+  },
+  "Navbar": {
+    "projects": "Projects",
+    "experience": "Experience",
+    "stack": "Stack",
+    "about": "About"
+  },
+  "Hero": {
+    "typewriter": ["Hello World!", "I'm João Carvalho.", "Software Developer"],
+    "buttons": {
+      "projects": "View Projects",
+      "cv": "Download CV"
+    },
+    "scroll": "Scroll down"
+  },
+  "Projects": {
+    "title": "Featured Projects",
+    "actions": {
+      "code": "Code",
+      "demo": "Live Demo",
+      "download": "Download APK"
+    }
+  },
+  "Stack": {
+    "title": "My Stacks",
+    "categories": {
+      "languages": "Languages",
+      "mobile": "Mobile",
+      "frontend": "Front-end",
+      "backend": "Back-end",
+      "database": "Database",
+      "tools": "Tools & Others"
+    }
+  },
+  "About": {
+    "title": "About Me",
+    "description1": "Software Developer experienced in creating web and mobile applications. Additionally, I am an Information Systems undergraduate at UFOPA with a technical degree in Informatics from IFPA. During high school (2018), I had my first contact with a programming language (C) and subsequently dedicated myself to Web Development. It was only at university that I encountered mobile development, and since then, I have been working in both areas. Parallel to projects, as a scholar and Director of Academic Training at the Information Systems Academic Center, I organize and teach programming short courses, workshops, and mentoring sessions, focusing on helping other students start their journeys in software development."
+  },
+  "Footer": {
+    "navigation": "Navigation",
+    "connect": "Connect",
+    "rights": "All rights reserved.",
+    "madeWith": "Made with Next.js 16, Tailwind & Shadcn UI."
+  },
+  "Experience": {
+    "title": "Professional Experience",
+    "items": [
+      {
+        "role": "Software Developer",
+        "company": "EMBRAPII - Bioforest Unit",
+        "date": "2025 - Present",
+        "description": "Development of web and mobile applications, having completed the forest inventory app: Promanejo. Currently developing an environmental and social management system for field data collection using dynamic forms."
+      },
+      {
+        "role": "PET Scholar",
+        "company": "UFOPA - Federal University of Western Pará",
+        "date": "2023 - Present",
+        "description": "Development of technological solutions focused on research, such as the creation of a Geotourism App for the Ponta de Pedras community, aiming to boost the local economy. I organize and teach programming workshops and participate in university extension projects."
+      },
+      {
+        "role": "Director of Academic Training",
+        "company": "Information Systems Academic Center",
+        "date": "2023 - Present",
+        "description": "Responsible for coordinating educational activities, promoting technology workshops, and assisting new students in introducing them to the software development area."
+      }
+    ]
+  }
+}

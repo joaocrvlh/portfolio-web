@@ -1,0 +1,77 @@
+{
+  "Metadata": {
+    "title": "Jaum Dev",
+    "description": "Portfólio de Desenvolvedor de Software"
+  },
+  "Navbar": {
+    "projects": "Projetos",
+    "experience": "Experiência",
+    "stack": "Stack",
+    "about": "Sobre"
+  },
+
+  "Hero": {
+    "typewriter": [
+      "Olá mundo!",
+      "Eu sou o João Carvalho.",
+      "Desenvolvedor de Software"
+    ],
+    "buttons": {
+      "projects": "Ver Projetos",
+      "cv": "Baixar CV"
+    },
+    "scroll": "Role para baixo"
+  },
+  "Projects": {
+    "title": "Projetos em Destaque",
+    "actions": {
+      "code": "Código",
+      "demo": "Demo Ao Vivo",
+      "download": "Baixar APK"
+    }
+  },
+  "Stack": {
+    "title": "Minhas Stacks",
+    "categories": {
+      "languages": "Linguagens",
+      "mobile": "Mobile",
+      "frontend": "Front-end",
+      "backend": "Back-end",
+      "database": "Banco de Dados",
+      "tools": "Ferramentas & Outros"
+    }
+  },
+  "About": {
+    "title": "Sobre Mim",
+    "description1": "Desenvolvedor de Software com experiência na criação de aplicações web e mobile. Além disso, sou graduando do curso de Sistemas de Informação (UFOPA) com formação técnica em Informática (IFPA). Durante o ensino médio (2018) obtive meu primeiro contato com uma linguagem de programação (C) e posteriormente me dediquei em Desenvolvimento Web, e somente na universidade obtive contato com desenvovimento mobile e desde então tenho atuado nessas duas áreas. Paralelamente aos projetos, como bolsista e Diretor de Formação Acadêmica do Centro Acadêmico de Sistemas de Informação, organizo e ministro minicursos, oficinas e monitorias de programação, com foco em ajudar outros estudantes a iniciarem suas jornadas no desenvolvimento de software."
+  },
+  "Footer": {
+    "navigation": "Navegação",
+    "connect": "Conecte-se",
+    "rights": "Todos os direitos reservados.",
+    "madeWith": "Feito com Next.js 16, Tailwind & Shadcn UI."
+  },
+  "Experience": {
+    "title": "Experiência Profissional",
+    "items": [
+      {
+        "role": "Desenvolvedor de Software",
+        "company": "EMBRAPII - Unidade Bioforest",
+        "date": "2025 - Atualmente",
+        "description": "Desenvolvimento de aplicações web e mobile, tendo como projeto concluído o aplicativo de inventário florestal: Promanejo. Atualmente, desenvolvendo um sistema de gestão ambiental e social para coleta de dados em campo através de formulários dinâmicos."
+      },
+      {
+        "role": "Bolsista PET",
+        "company": "UFOPA - Universidade Federal do Oeste do Pará",
+        "date": "2023 - Atualmente",
+        "description": "Desenvolvimento de soluções tecnológicas voltadas para área de pesquisa, como a criação de um App de Geoturismo para a comunidade de Ponta de Pedras, tendo como objetivo impulsionar a economia local. Organizo e ministro oficinas de programação e participo de projetos de extensão universitária."
+      },
+      {
+        "role": "Diretor de Formação Acadêmica",
+        "company": "Centro Acadêmico de Sistemas de Informação",
+        "date": "2023 - Atualmente",
+        "description": "Responsável por coordenar atividades educacionais, promover workshops de tecnologia e auxiliar novos alunos na introdução à área de desenvolvimento de software."
+      }
+    ]
+  }
+}
