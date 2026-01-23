@@ -39,16 +39,13 @@ export default function Experience() {
         </div>
 
         <div className="max-w-3xl mx-auto">
-          {/* Container da Timeline */}
           <div className="relative border-l border-muted ml-4 md:ml-6 space-y-12">
             {items.map((item, index) => (
               <div key={index} className="relative pl-8 md:pl-12">
-                {/* Ícone/Bolinha da Timeline */}
                 <span className="absolute -left-[11px] top-1 h-6 w-6 rounded-full bg-background border-2 border-primary flex items-center justify-center z-10">
                   <div className="h-2 w-2 rounded-full bg-primary" />
                 </span>
 
-                {/* Conteúdo do Card */}
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                     <h3 className="text-xl font-bold leading-none">
