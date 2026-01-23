@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "jaum.dev",
-  description: "Portfólio de Desenvolvedor Fullstack e Mobile",
+  description: "Software Developer - Portfolio",
 };
 
 type Props = {
