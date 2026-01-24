@@ -4,6 +4,7 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { SectionReveal } from "../section-reveal";
 
 export default function Footer() {
@@ -16,7 +17,18 @@ export default function Footer() {
         <div className="container py-12 md:py-16">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <div className="space-y-4">
-              <h3 className="text-lg font-bold">jaum.dev</h3>
+              <div className="flex items-center gap-3">
+                <Image
+                  src="/images/avatar.png"
+                  alt="Avatar Jaum Dev"
+                  width={35}
+                  height={35}
+                  className="object-cover"
+                />
+                <h3 className="text-lg font-bold tracking-tight">
+                  joaocrvlh.dev
+                </h3>
+              </div>
             </div>
 
             <div className="space-y-4">
@@ -92,11 +104,11 @@ export default function Footer() {
           </div>
 
           <Separator className="my-8" />
+
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
             <p>
-              &copy; {new Date().getFullYear()} jaum.dev. {t("rights")}
+              &copy; {new Date().getFullYear()} João Carvalho. {t("rights")}
             </p>
-            <p>{t("madeWith")}</p>
           </div>
         </div>
       </SectionReveal>

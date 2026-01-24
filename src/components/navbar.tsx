@@ -7,6 +7,8 @@ import { LangSwitcher } from "./lang-switcher";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
 import { Github, Linkedin, Menu } from "lucide-react";
+import Image from "next/image";
+
 import {
   Sheet,
   SheetContent,
@@ -48,10 +50,17 @@ export function Navbar() {
           <Link
             href="/"
             onClick={handleScrollToTop}
-            className="flex items-center space-x-2"
+            className="flex items-center gap-3"
           >
+            <Image
+              src="/images/avatar.png"
+              alt="Avatar Jaum Dev"
+              width={35}
+              height={35}
+              className="object-cover"
+            />
             <span className="font-bold inline-block text-lg tracking-tight">
-              jaum.dev
+              joaocrvlh.dev
             </span>
           </Link>
         </div>
