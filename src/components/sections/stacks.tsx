@@ -91,7 +91,7 @@ function StackRow({
           >
             <div className="relative h-14 w-14 transition-transform duration-300 group-hover:scale-110">
               <Image
-                src={`/images/${tech.slug}.svg`}
+                src={`/images/stacks/${tech.slug}.svg`}
                 alt={tech.name}
                 fill
                 sizes="56px"
