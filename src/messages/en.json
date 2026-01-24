@@ -18,7 +18,8 @@
     "scroll": "Scroll down"
   },
   "Projects": {
-    "title": "Featured Projects",
+    "title": "Projects",
+    "description": "Coming soon",
     "actions": {
       "code": "Code",
       "demo": "Live Demo",

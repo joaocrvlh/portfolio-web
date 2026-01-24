@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { SectionReveal } from "../section-reveal";
 import { Code2 } from "lucide-react";
-
+import { useTranslations } from "next-intl";
 const placeholders = [
   {
     id: 1,
@@ -28,12 +28,14 @@ const placeholders = [
 ];
 
 export default function ProjectsSection() {
+  const t = useTranslations("Projects");
+
   return (
     <section id="projects" className="container py-24 space-y-12">
       <SectionReveal>
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-            Projetos
+            {t("title")}
           </h2>
         </div>
 
@@ -53,7 +55,9 @@ export default function ProjectsSection() {
                   </div>
 
                   <div className="space-y-2">
-                    <h3 className="font-semibold text-xl">Em Breve</h3>
+                    <h3 className="font-semibold text-xl">
+                      {t("description")}
+                    </h3>
                     <p className="text-sm text-muted-foreground max-w-[200px]">
                       ...
                     </p>

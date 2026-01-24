@@ -23,7 +23,8 @@
     "scroll": "Role para baixo"
   },
   "Projects": {
-    "title": "Projetos em Destaque",
+    "title": "Projetos",
+    "description": "Em breve",
     "actions": {
       "code": "Código",
       "demo": "Demo Ao Vivo",
