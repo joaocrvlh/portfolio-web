@@ -1,26 +1,33 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import { ThemeProvider } from "@/components/theme-provider";
 import "../globals.css";
 import { Navbar } from "@/components/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "jaum.dev",
-  description: "Software Developer - Portfolio",
-};
-
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
 
-export default async function RootLayout({ children, params }: Props) {
+export async function generateMetadata({
+  params,
+}: Omit<Props, "children">): Promise<Metadata> {
   const { locale } = await params;
 
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
+
+export default async function RootLayout({ children, params }: Props) {
+  const { locale } = await params;
   const messages = await getMessages();
 
   return (
