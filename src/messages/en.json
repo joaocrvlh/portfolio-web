@@ -19,12 +19,29 @@
   },
   "Projects": {
     "title": "Projects",
-    "description": "Coming soon",
     "actions": {
       "code": "Code",
       "demo": "Live Demo",
       "download": "Download APK"
-    }
+    },
+    "items": [
+      {
+        "title": "PET IEG Admin",
+        "description": "Web application for managing tutoring sessions for subjects in the Tutorial Education Program of the Institute of Engineering and Geosciences at UFOPA."
+      },
+      {
+        "title": "SIGAS",
+        "description": "Web application for the Integrated Environmental and Social Management System, aimed at managing forms and field data collection."
+      },
+      {
+        "title": "Iron Tracker",
+        "description": "Mobile application for workout tracking, performance analysis, and fitness progress gamification."
+      },
+      {
+        "title": "GeoTour",
+        "description": "Mobile geotourism application with immersive geological exploration experiences of the Ponta de Pedras region, featuring 360° panoramic views."
+      }
+    ]
   },
   "Stack": {
     "title": "My Stacks",
