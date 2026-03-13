@@ -24,12 +24,29 @@
   },
   "Projects": {
     "title": "Projetos",
-    "description": "Em breve",
     "actions": {
       "code": "Código",
       "demo": "Demo Ao Vivo",
       "download": "Baixar APK"
-    }
+    },
+    "items": [
+      {
+        "title": "PET IEG Admin",
+        "description": "Aplicação web para gerencimento de monitorias de disciplinas do Programa de Educação Tutorial do Insituto de Engenharia e Geociências da UFOPA."
+      },
+      {
+        "title": "SIGAS",
+        "description": "Aplicação web para o Sistema Integrado de Gestão Ambiental e social com o objetivo de gerenciar formulário e coleta de dados."
+      },
+      {
+        "title": "Iron Tracker",
+        "description": "Aplicativo mobile para rastreamento de treinos, análise de performance e gamificação de progresso fitness."
+      },
+      {
+        "title": "GeoTour",
+        "description": "Aplicativo mobile de geoturismo com experiências imersivas de exploração geológica da região de Ponta de Pedras com visualizações panorâmicas em 360°."
+      }
+    ]
   },
   "Stack": {
     "title": "Minhas Stacks",
