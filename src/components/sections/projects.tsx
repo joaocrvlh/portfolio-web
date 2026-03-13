@@ -27,7 +27,6 @@ const projects = [
     type: "Web" as const,
     tags: ["React", "Shadcn UI", "Zustand", "TanStack"],
     images: [
-      "/images/projects/project-2/p2.jpeg",
       "/images/projects/project-2/p2-1.jpeg",
       "/images/projects/project-2/p2-11.jpeg",
       "/images/projects/project-2/p2-3.jpeg",
@@ -54,7 +53,7 @@ const projects = [
       "/images/projects/project-3/p3-9.jpeg",
     ],
     githubUrl: "https://github.com/JaumCarvalho/iron-tracker.git",
-    deployUrl: undefined,
+    deployUrl: "https://github.com/JaumCarvalho/iron-tracker/releases/tag/v1",
     delay: 0.2,
   },
   {
