@@ -34,7 +34,7 @@ const projects = [
       "/images/projects/project-2/p2-5.jpeg",
     ],
     githubUrl: undefined,
-    deployUrl: "https://sigas-green.vercel.app/",
+    deployUrl: undefined,
     delay: 0.1,
   },
   {
