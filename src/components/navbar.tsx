@@ -54,7 +54,7 @@ export function Navbar() {
           >
             <Image
               src="/images/avatar.png"
-              alt="Avatar Jaum Dev"
+              alt="Avatar joaocrvlh.dev"
               width={35}
               height={35}
               className="object-cover"
@@ -86,7 +86,7 @@ export function Navbar() {
               className="hidden sm:flex"
             >
               <a
-                href="https://github.com/jaumcarvalho"
+                href="https://github.com/joaocrvlh"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -100,7 +100,7 @@ export function Navbar() {
               className="hidden sm:flex"
             >
               <a
-                href="https://www.linkedin.com/in/jaum-carvalho"
+                href="https://www.linkedin.com/in/joaocrvlh"
                 target="_blank"
                 rel="noreferrer"
               >
