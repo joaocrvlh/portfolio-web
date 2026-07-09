@@ -151,7 +151,7 @@ export function Navbar() {
                     </span>
                     <div className="flex gap-8">
                       <a
-                        href="https://github.com/jaumcarvalho"
+                        href="https://github.com/joaocrvlh"
                         target="_blank"
                         rel="noreferrer"
                         className="p-3 rounded-full bg-muted/50 hover:bg-muted transition-colors"
@@ -159,7 +159,7 @@ export function Navbar() {
                         <Github className="h-6 w-6" />
                       </a>
                       <a
-                        href="https://www.linkedin.com/in/jaum-carvalho"
+                        href="https://www.linkedin.com/in/joaocrvlh"
                         target="_blank"
                         rel="noreferrer"
                         className="p-3 rounded-full bg-muted/50 hover:bg-muted transition-colors"
