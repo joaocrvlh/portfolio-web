@@ -7,13 +7,31 @@
     "projects": "Projects",
     "experience": "Experience",
     "stack": "Stack",
-    "about": "About"
+    "about": "About",
+    "contact": "Contact",
+    "terminal": "Terminal",
+    "game": "Arcade"
+  },
+  "Desktop": {
+    "close": "Close window",
+    "skip": "Skip"
   },
   "Hero": {
-    "typewriter": ["Hello World!", "I'm João Carvalho.", "Software Developer"],
+    "typewriter": [
+      "Hello World!",
+      "I'm João Carvalho.",
+      "Software Developer"
+    ],
     "buttons": {
       "projects": "View Projects",
-      "cv": "Download CV"
+      "cv": "Download CV",
+      "contact": "Say hello"
+    },
+    "installer": {
+      "title": "Installing joaocrvlh.dev",
+      "tagline": "Web & mobile applications.",
+      "eta": "Estimated time: one quick scroll.",
+      "done": "Install complete. Welcome!"
     },
     "scroll": "Scroll down"
   },
@@ -74,5 +92,70 @@
         "description": "Development of web and mobile applications, having completed the forest inventory app: Promanejo. Currently developing an environmental and social management system for field data collection using dynamic forms."
       }
     ]
+  },
+  "Game": {
+    "score": "Score",
+    "best": "Best",
+    "start": "Start",
+    "over": "Game over",
+    "restart": "Play again",
+    "controls": "Arrow keys or WASD to move. On mobile, swipe or use the pad.",
+    "arcade": "Pick a game",
+    "games": {
+      "snake": "Snake",
+      "memory": "Memory",
+      "tictactoe": "Tic-Tac-Toe",
+      "runner": "Runner"
+    },
+    "memory": {
+      "moves": "Moves",
+      "hidden": "hidden card",
+      "won": "You won in {moves} moves!",
+      "hint": "Find all the matching technology pairs."
+    },
+    "ttt": {
+      "yourTurn": "Your turn (X)",
+      "thinking": "CPU is thinking...",
+      "youWin": "You win!",
+      "cpuWins": "CPU wins",
+      "draw": "It's a draw",
+      "record": "You {w} · CPU {l} · Draw {d}"
+    },
+    "runner": {
+      "hint": "Space, arrow up or tap to jump."
+    }
+  },
+  "Terminal": {
+    "welcome": "joaocrvlh.dev terminal v1.0",
+    "hint": "Type 'help' to list the commands.",
+    "notFound": "command not found: {cmd}. Type 'help' for the list.",
+    "openUsage": "usage: open <about|projects|experience|stack|contact|terminal|arcade>",
+    "opening": "opening {name}...",
+    "playStart": "starting {name}...",
+    "themeSet": "theme: {mode}",
+    "langUsage": "usage: lang <pt|en>",
+    "langSame": "already using this language.",
+    "langSwitching": "switching language...",
+    "sudo": "joao is not in the sudoers file. This incident will be reported.",
+    "rm": "nice try.",
+    "help": {
+      "title": "Available commands:",
+      "help": "show this list",
+      "about": "who I am",
+      "projects": "things I've built",
+      "experience": "where I've worked",
+      "stack": "technologies I use",
+      "contact": "how to reach me",
+      "ls": "list the desktop",
+      "open": "open a window",
+      "play": "play a game (snake, memory, tictactoe, runner)",
+      "theme": "toggle light/dark",
+      "lang": "switch language",
+      "whoami": "current user",
+      "date": "current date and time",
+      "echo": "print text",
+      "clear": "clear the screen"
+    },
+    "playUsage": "usage: play [snake|memory|tictactoe|runner]"
   }
 }
