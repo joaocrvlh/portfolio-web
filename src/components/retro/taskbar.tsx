@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import {
   Github,
   LayoutGrid,
@@ -63,12 +62,10 @@ export function Taskbar({
   homeLabel,
 }: TaskbarProps) {
   return (
-    <motion.div
-      initial={{ y: "100%" }}
-      animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 260, damping: 28, delay: 0.2 }}
+    <div
+      style={{ animationDelay: "0.2s" }}
       className={cn(
-        "absolute inset-x-0 bottom-0 z-[900] flex h-(--taskbar) items-center justify-between gap-3 border-t-2 bg-background px-3 pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_0_0_var(--retro-shadow)]",
+        "animate-slide-up absolute inset-x-0 bottom-0 z-[900] flex h-(--taskbar) items-center justify-between gap-3 border-t-2 bg-background px-3 pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_0_0_var(--retro-shadow)]",
         !compact && "sm:grid sm:grid-cols-[1fr_auto_1fr] sm:px-6",
       )}
     >
@@ -121,21 +118,18 @@ export function Taskbar({
 
       <div className={cn("flex items-center gap-3", !compact && "sm:gap-4")}>
         {dock.map(({ label, href, icon: Icon, className, external }) => (
-          <motion.a
+          <a
             key={label}
             href={href}
             aria-label={label}
             {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
-            whileHover={{ y: -8, scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 15 }}
             className={cn(
-              "flex size-11 items-center justify-center rounded-2xl border-2 shadow-retro-sm sm:size-14",
+              "flex size-11 items-center justify-center rounded-2xl border-2 shadow-retro-sm transition-transform duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-2 hover:scale-110 active:scale-95 sm:size-14",
               className,
             )}
           >
             <Icon className="size-5 sm:size-7" />
-          </motion.a>
+          </a>
         ))}
       </div>
 
@@ -144,6 +138,6 @@ export function Taskbar({
         <LangSwitcher />
         <ThemeToggle />
       </div>
-    </motion.div>
+    </div>
   );
 }
