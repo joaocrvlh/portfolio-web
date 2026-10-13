@@ -7,9 +7,15 @@
     "projects": "Projetos",
     "experience": "Experiência",
     "stack": "Stack",
-    "about": "Sobre"
+    "about": "Sobre",
+    "contact": "Contato",
+    "terminal": "Terminal",
+    "game": "Arcade"
   },
-
+  "Desktop": {
+    "close": "Fechar janela",
+    "skip": "Pular"
+  },
   "Hero": {
     "typewriter": [
       "Olá mundo!",
@@ -18,7 +24,14 @@
     ],
     "buttons": {
       "projects": "Ver Projetos",
-      "cv": "Baixar CV"
+      "cv": "Baixar CV",
+      "contact": "Dizer olá"
+    },
+    "installer": {
+      "title": "Instalando joaocrvlh.dev",
+      "tagline": "Aplicações web e mobile.",
+      "eta": "Tempo estimado: uma rolagem rápida.",
+      "done": "Instalação concluída. Bem-vindo!"
     },
     "scroll": "Role para baixo"
   },
@@ -61,7 +74,7 @@
   },
   "About": {
     "title": "Sobre Mim",
-    "description1": "Desenvolvedor de Software com experiência na criação de aplicações web e mobile. Além disso, sou graduando do curso de Sistemas de Informação (UFOPA) com formação técnica em Informática (IFPA). Durante o ensino médio (2018) obtive meu primeiro contato com uma linguagem de programação (C) e posteriormente me dediquei em Desenvolvimento Web, e somente na universidade obtive contato com desenvovimento mobile e desde então tenho atuado nessas duas áreas. Paralelamente aos projetos, como bolsista e Diretor de Formação Acadêmica do Centro Acadêmico de Sistemas de Informação, organizo e ministro minicursos, oficinas e monitorias de programação, com foco em ajudar outros estudantes a iniciarem suas jornadas no desenvolvimento de software."
+    "description1": "Desenvolvedor de Software com experiência na criação de aplicações web e mobile. Além disso, sou graduando do curso de Sistemas de Informação (UFOPA) com formação técnica em Informática (IFPA). Durante o ensino médio (2018) obtive meu primeiro contato com uma linguagem de programação (C) e posteriormente me dediquei em Desenvolvimento Web, e somente na universidade obtive contato com desenvolvimento mobile e desde então tenho atuado nessas duas áreas. Paralelamente aos projetos, organizo e ministro minicursos, oficinas e monitorias de programação, com foco em ajudar outros estudantes a iniciarem suas jornadas no desenvolvimento de software."
   },
   "Footer": {
     "navigation": "Navegação",
@@ -79,5 +92,70 @@
         "description": "Desenvolvimento de aplicações web e mobile, tendo como projeto concluído o aplicativo de inventário florestal: Promanejo. Atualmente, desenvolvendo um sistema de gestão ambiental e social para coleta de dados em campo através de formulários dinâmicos."
       }
     ]
+  },
+  "Game": {
+    "score": "Pontos",
+    "best": "Recorde",
+    "start": "Jogar",
+    "over": "Fim de jogo",
+    "restart": "Jogar de novo",
+    "controls": "Setas ou WASD para mover. No celular, deslize ou use o direcional.",
+    "arcade": "Escolha um jogo",
+    "games": {
+      "snake": "Snake",
+      "memory": "Memória",
+      "tictactoe": "Jogo da Velha",
+      "runner": "Runner"
+    },
+    "memory": {
+      "moves": "Jogadas",
+      "hidden": "carta virada",
+      "won": "Você venceu em {moves} jogadas!",
+      "hint": "Encontre todos os pares de tecnologias."
+    },
+    "ttt": {
+      "yourTurn": "Sua vez (X)",
+      "thinking": "A CPU está pensando...",
+      "youWin": "Você venceu!",
+      "cpuWins": "A CPU venceu",
+      "draw": "Deu velha",
+      "record": "Você {w} · CPU {l} · Empates {d}"
+    },
+    "runner": {
+      "hint": "Espaço, seta para cima ou toque para pular."
+    }
+  },
+  "Terminal": {
+    "welcome": "terminal joaocrvlh.dev v1.0",
+    "hint": "Digite 'help' para listar os comandos.",
+    "notFound": "comando não encontrado: {cmd}. Digite 'help' para ver a lista.",
+    "openUsage": "uso: open <about|projects|experience|stack|contact|terminal|arcade>",
+    "opening": "abrindo {name}...",
+    "playStart": "iniciando {name}...",
+    "themeSet": "tema: {mode}",
+    "langUsage": "uso: lang <pt|en>",
+    "langSame": "você já está neste idioma.",
+    "langSwitching": "trocando de idioma...",
+    "sudo": "joao não está no arquivo sudoers. Este incidente será reportado.",
+    "rm": "boa tentativa.",
+    "help": {
+      "title": "Comandos disponíveis:",
+      "help": "mostra esta lista",
+      "about": "quem sou eu",
+      "projects": "o que eu já construí",
+      "experience": "onde já trabalhei",
+      "stack": "tecnologias que eu uso",
+      "contact": "como falar comigo",
+      "ls": "lista a área de trabalho",
+      "open": "abre uma janela",
+      "play": "joga um jogo (snake, memory, tictactoe, runner)",
+      "theme": "alterna claro/escuro",
+      "lang": "troca o idioma",
+      "whoami": "usuário atual",
+      "date": "data e hora atuais",
+      "echo": "imprime um texto",
+      "clear": "limpa a tela"
+    },
+    "playUsage": "uso: play [snake|memory|tictactoe|runner]"
   }
 }
