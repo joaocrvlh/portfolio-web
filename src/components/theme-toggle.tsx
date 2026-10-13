@@ -53,24 +53,23 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <Button variant="ghost" size="icon" disabled>
-        <Sun className="h-[1.2rem] w-[1.2rem]" />
+      <Button variant="outline" size="icon-sm" disabled>
+        <Sun className="size-4" />
       </Button>
     );
   }
 
   return (
     <Button
-      variant="ghost"
-      size="icon"
+      variant="outline"
+      size="icon-sm"
       onClick={toggleTheme}
-      className="rounded-full transition-transform active:scale-90"
       title="Alternar tema"
     >
       {resolvedTheme === "dark" ? (
-        <Moon className="h-[1.2rem] w-[1.2rem] transition-all" />
+        <Moon className="size-4" />
       ) : (
-        <Sun className="h-[1.2rem] w-[1.2rem] transition-all" />
+        <Sun className="size-4" />
       )}
       <span className="sr-only">Toggle theme</span>
     </Button>
