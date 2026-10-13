@@ -1,7 +1,6 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const tones = {
@@ -34,22 +33,18 @@ export function DesktopIcon({
   delay = 0,
 }: DesktopIconProps) {
   return (
-    <motion.button
+    <button
       type="button"
       onClick={onClick}
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ type: "spring", stiffness: 320, damping: 20, delay }}
-      whileHover={{ y: -4 }}
-      whileTap={{ y: 1 }}
+      style={{ animationDelay: `${delay}s` }}
       className={cn(
-        "group flex w-16 flex-col items-center gap-2 text-center outline-offset-4 sm:w-20",
+        "group animate-pop-in flex w-16 flex-col items-center gap-2 text-center outline-offset-4 sm:w-20",
         className,
       )}
     >
       <span
         className={cn(
-          "relative flex size-12 items-center justify-center rounded-2xl border-2 shadow-retro-sm transition-colors group-hover:bg-foreground group-hover:text-background sm:size-14",
+          "relative flex size-12 items-center justify-center rounded-2xl border-2 shadow-retro-sm transition-[translate,background-color,color] duration-200 group-hover:-translate-y-1 group-hover:bg-foreground group-hover:text-background group-active:translate-y-px sm:size-14",
           tones[tone],
         )}
       >
@@ -61,6 +56,6 @@ export function DesktopIcon({
       <span className="rounded-full bg-background px-2.5 py-0.5 text-[10px] leading-tight font-bold text-foreground ring-2 ring-border transition-colors group-hover:bg-foreground group-hover:text-background sm:text-[11px]">
         {label}
       </span>
-    </motion.button>
+    </button>
   );
 }
