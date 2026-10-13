@@ -20,12 +20,13 @@ import { Taskbar } from "@/components/retro/taskbar";
 import { ProfileApp } from "@/components/apps/profile";
 import { WorksApp } from "@/components/apps/works";
 import { ExperienceApp } from "@/components/apps/experience";
-import { StackApp } from "@/components/apps/stack";
+import { StackApp, stackCategories } from "@/components/apps/stack";
 import { ContactApp } from "@/components/apps/contact";
 import { TerminalApp } from "@/components/apps/terminal";
 import { GameApp } from "@/components/apps/game";
 import type { AppId, AppProps } from "@/lib/apps";
 import { COMPACT_QUERY, useCompact } from "@/lib/use-compact";
+import { useIdlePreload } from "@/lib/use-idle-preload";
 
 const BOOT_KEY = "portfolio-booted";
 
@@ -111,6 +112,10 @@ const apps: Record<
 const leftIcons: AppId[] = ["profile", "works", "experience", "terminal"];
 const rightIcons: AppId[] = ["stack", "contact", "game"];
 
+const PRELOAD_ICONS = Array.from(
+  new Set(stackCategories.flatMap((c) => c.items.map((i) => i.slug))),
+).map((slug) => `/images/stacks/${slug}.svg`);
+
 interface OpenWindow {
   id: AppId;
   arg?: string;
@@ -130,23 +135,27 @@ export function Desktop() {
   const openApp = useCallback((id: AppId, arg?: string) => {
     const z = ++topZ.current;
     const wide = !window.matchMedia(COMPACT_QUERY).matches;
-    setWindows((ws) =>
-      ws.some((w) => w.id === id)
-        ? ws.map((w) =>
-            w.id === id ? { ...w, z, ...(arg !== undefined && { arg }) } : w,
-          )
-        : [
-            ...ws,
-            {
-              id,
-              arg,
-              z,
-              offset: wide
-                ? { x: (ws.length % 4) * 28 - 42, y: (ws.length % 4) * 22 - 33 }
-                : { x: 0, y: 0 },
-            },
-          ],
-    );
+    setWindows((ws) => {
+      const existing = ws.find((w) => w.id === id);
+      if (existing) {
+        const onTop = ws.every((w) => w.z <= existing.z);
+        if (onTop && (arg === undefined || arg === existing.arg)) return ws;
+        return ws.map((w) =>
+          w.id === id ? { ...w, z, ...(arg !== undefined && { arg }) } : w,
+        );
+      }
+      return [
+        ...ws,
+        {
+          id,
+          arg,
+          z,
+          offset: wide
+            ? { x: (ws.length % 4) * 28 - 42, y: (ws.length % 4) * 22 - 33 }
+            : { x: 0, y: 0 },
+        },
+      ];
+    });
   }, []);
 
   const closeApp = useCallback((id: AppId) => {
@@ -192,6 +201,7 @@ export function Desktop() {
   }, [focused, closeApp]);
 
   const ready = phase === "ready";
+  useIdlePreload(PRELOAD_ICONS, ready);
   const openIds = new Set(windows.map((w) => w.id));
 
   const renderIcons = (ids: AppId[], baseDelay: number) =>
