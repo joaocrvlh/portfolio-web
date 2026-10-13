@@ -36,7 +36,6 @@ export function BootWindow({ onDone }: { onDone: () => void }) {
 
   return (
     <RetroWindow
-      reveal={false}
       title={t("installer.title")}
       className="w-full max-w-2xl"
       bodyClassName="grid gap-5 p-5 sm:grid-cols-[12rem_1fr] sm:gap-6 sm:p-6"
