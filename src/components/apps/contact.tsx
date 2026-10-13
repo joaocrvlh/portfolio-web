@@ -1,7 +1,6 @@
 "use client";
 
 import { ArrowUpRight, Github, Linkedin, Mail, type LucideIcon } from "lucide-react";
-import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { AppHeading } from "@/components/apps/app-heading";
 import { socials } from "@/lib/links";
@@ -49,11 +48,10 @@ export function ContactApp() {
       <AppHeading>{t("connect")}</AppHeading>
       <ul className="space-y-3">
         {links.map(({ label, value, href, icon: Icon, external, tone }, i) => (
-          <motion.li
+          <li
             key={label}
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 + i * 0.08 }}
+            style={{ animationDelay: `${100 + i * 80}ms` }}
+            className="animate-rise-in"
           >
             <a
               href={href}
@@ -79,7 +77,7 @@ export function ContactApp() {
                 strokeWidth={2.5}
               />
             </a>
-          </motion.li>
+          </li>
         ))}
       </ul>
     </div>
