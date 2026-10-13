@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { ArrowUpRight, Github, Globe, Smartphone, FolderGit2 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -57,11 +56,9 @@ export function ProjectCard({
   }, [images.length]);
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 260, damping: 24, delay }}
-      className="flex h-full flex-col gap-4 rounded-3xl border-2 bg-background p-3 shadow-retro transition-[translate,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-retro-lg"
+    <article
+      style={{ animationDelay: `${delay}s` }}
+      className="animate-rise-in flex h-full flex-col gap-4 rounded-3xl border-2 bg-background p-3 shadow-retro transition-[translate,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-retro-lg"
     >
       <div className="relative aspect-video w-full overflow-hidden rounded-2xl border-2 bg-muted">
         {images.length > 0 ? (
@@ -160,6 +157,6 @@ export function ProjectCard({
           </div>
         )}
       </div>
-    </motion.article>
+    </article>
   );
 }
