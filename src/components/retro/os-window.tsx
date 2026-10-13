@@ -23,7 +23,14 @@ interface OsWindowProps {
   barClassName?: string;
   bodyClassName?: string;
   compact?: boolean;
+  closing?: boolean;
+  onClosed: () => void;
   children: ReactNode;
+}
+
+function DeferredContent({ children }: { children: ReactNode }) {
+  const ready = useDeferredValue(true, false);
+  return ready ? children : null;
 }
 
 export function OsWindow({
@@ -38,10 +45,11 @@ export function OsWindow({
   barClassName = "bg-secondary text-secondary-foreground",
   bodyClassName,
   compact = false,
+  closing = false,
+  onClosed,
   children,
 }: OsWindowProps) {
   const controls = useDragControls();
-  const contentReady = useDeferredValue(true, false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -61,41 +69,26 @@ export function OsWindow({
         role="dialog"
         aria-label={title}
         tabIndex={-1}
-        drag={!compact}
+        drag={!compact && !closing}
         dragControls={controls}
         dragListener={false}
         dragMomentum={false}
         dragElastic={0}
         dragConstraints={constraintsRef}
-        initial={
-          compact
-            ? { opacity: 0, transform: "translateY(40px)" }
-            : { opacity: 0, scale: 0.9, x: offset.x, y: offset.y + 18 }
-        }
-        animate={
-          compact
-            ? { opacity: 1, transform: "translateY(0px)" }
-            : { opacity: 1, scale: 1, y: offset.y }
-        }
-        exit={
-          compact
-            ? {
-                opacity: 0,
-                transform: "translateY(40px)",
-                transition: { duration: 0.18, ease: "easeIn" },
-              }
-            : { opacity: 0, scale: 0.92, transition: { duration: 0.15 } }
-        }
-        transition={
-          compact
-            ? { type: "tween", duration: 0.26, ease: [0.22, 1, 0.36, 1] }
-            : { type: "spring", stiffness: 320, damping: 26 }
-        }
-        onPointerDown={onFocus}
+        style={compact ? { x: 0, y: 0 } : { x: offset.x, y: offset.y }}
+        onPointerDown={closing ? undefined : onFocus}
+        onAnimationEnd={(e) => {
+          if (closing && e.target === e.currentTarget) onClosed();
+        }}
         className={cn(
           "pointer-events-auto flex max-h-full flex-col overflow-hidden rounded-2xl sm:max-h-[calc(100%-3rem)] border-2 bg-background shadow-retro-lg outline-none",
           className,
           compact && "size-full sm:max-h-full",
+          closing
+            ? cn("pointer-events-none", compact ? "animate-sheet-out" : "animate-window-out")
+            : compact
+              ? "animate-sheet-in"
+              : "animate-window-in",
         )}
       >
         <div
@@ -130,7 +123,7 @@ export function OsWindow({
             bodyClassName,
           )}
         >
-          {contentReady ? children : null}
+          <DeferredContent>{children}</DeferredContent>
         </div>
       </motion.div>
     </div>
