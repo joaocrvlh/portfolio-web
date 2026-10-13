@@ -2,7 +2,13 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, type LucideIcon } from "lucide-react";
+import {
+  Github,
+  LayoutGrid,
+  Linkedin,
+  Mail,
+  type LucideIcon,
+} from "lucide-react";
 import { LangSwitcher } from "@/components/lang-switcher";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Clock } from "@/components/retro/clock";
@@ -19,6 +25,9 @@ interface TaskbarProps {
   items: TaskbarItem[];
   focusedId: string | null;
   onSelect: (id: string) => void;
+  compact: boolean;
+  onHome: () => void;
+  homeLabel: string;
 }
 
 const dock = [
@@ -45,15 +54,42 @@ const dock = [
   },
 ];
 
-export function Taskbar({ items, focusedId, onSelect }: TaskbarProps) {
+export function Taskbar({
+  items,
+  focusedId,
+  onSelect,
+  compact,
+  onHome,
+  homeLabel,
+}: TaskbarProps) {
   return (
     <motion.div
       initial={{ y: "100%" }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 260, damping: 28, delay: 0.2 }}
-      className="absolute inset-x-0 bottom-0 z-[900] flex h-(--taskbar) items-center justify-between gap-3 border-t-2 bg-background px-3 shadow-[0_-4px_0_0_var(--retro-shadow)] sm:grid sm:grid-cols-[1fr_auto_1fr] sm:px-6"
+      className={cn(
+        "absolute inset-x-0 bottom-0 z-[900] flex h-(--taskbar) items-center justify-between gap-3 border-t-2 bg-background px-3 pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_0_0_var(--retro-shadow)]",
+        !compact && "sm:grid sm:grid-cols-[1fr_auto_1fr] sm:px-6",
+      )}
     >
-      <div className="hidden min-w-0 items-center gap-2 overflow-hidden sm:flex">
+      {compact && (
+        <button
+          type="button"
+          aria-label={homeLabel}
+          title={homeLabel}
+          onClick={onHome}
+          disabled={items.length === 0}
+          className="flex size-11 shrink-0 items-center justify-center rounded-2xl border-2 bg-background shadow-retro-sm transition-[translate,box-shadow,opacity] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:opacity-40"
+        >
+          <LayoutGrid className="size-5" />
+        </button>
+      )}
+      <div
+        className={cn(
+          "hidden min-w-0 items-center gap-2 overflow-hidden",
+          !compact && "sm:flex",
+        )}
+      >
         <span className="mr-1 hidden shrink-0 items-center gap-2 2xl:flex">
           <Image
             src="/images/avatar.png"
@@ -83,7 +119,7 @@ export function Taskbar({ items, focusedId, onSelect }: TaskbarProps) {
         ))}
       </div>
 
-      <div className="flex items-center gap-3 sm:gap-4">
+      <div className={cn("flex items-center gap-3", !compact && "sm:gap-4")}>
         {dock.map(({ label, href, icon: Icon, className, external }) => (
           <motion.a
             key={label}
