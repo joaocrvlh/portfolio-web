@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode, type RefObject } from "react";
+import {
+  useDeferredValue,
+  useEffect,
+  useRef,
+  type ReactNode,
+  type RefObject,
+} from "react";
 import { motion, useDragControls } from "framer-motion";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -35,6 +41,7 @@ export function OsWindow({
   children,
 }: OsWindowProps) {
   const controls = useDragControls();
+  const contentReady = useDeferredValue(true, false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -62,16 +69,28 @@ export function OsWindow({
         dragConstraints={constraintsRef}
         initial={
           compact
-            ? { opacity: 0, scale: 1, x: 0, y: 40 }
+            ? { opacity: 0, transform: "translateY(40px)" }
             : { opacity: 0, scale: 0.9, x: offset.x, y: offset.y + 18 }
         }
         animate={
           compact
-            ? { opacity: 1, scale: 1, x: 0, y: 0 }
+            ? { opacity: 1, transform: "translateY(0px)" }
             : { opacity: 1, scale: 1, y: offset.y }
         }
-        exit={{ opacity: 0, scale: 0.92, transition: { duration: 0.15 } }}
-        transition={{ type: "spring", stiffness: 320, damping: 26 }}
+        exit={
+          compact
+            ? {
+                opacity: 0,
+                transform: "translateY(40px)",
+                transition: { duration: 0.18, ease: "easeIn" },
+              }
+            : { opacity: 0, scale: 0.92, transition: { duration: 0.15 } }
+        }
+        transition={
+          compact
+            ? { type: "tween", duration: 0.26, ease: [0.22, 1, 0.36, 1] }
+            : { type: "spring", stiffness: 320, damping: 26 }
+        }
         onPointerDown={onFocus}
         className={cn(
           "pointer-events-auto flex max-h-full flex-col overflow-hidden rounded-2xl sm:max-h-[calc(100%-3rem)] border-2 bg-background shadow-retro-lg outline-none",
@@ -111,7 +130,7 @@ export function OsWindow({
             bodyClassName,
           )}
         >
-          {children}
+          {contentReady ? children : null}
         </div>
       </motion.div>
     </div>
