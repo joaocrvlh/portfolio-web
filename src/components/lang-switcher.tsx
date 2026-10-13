@@ -20,7 +20,7 @@ export function LangSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon-sm">
+        <Button variant="outline" size="icon-sm" className="size-10 sm:size-8">
           <Languages className="size-4" />
           <span className="sr-only">Switch Language</span>
         </Button>
