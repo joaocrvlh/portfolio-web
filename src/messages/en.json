@@ -14,7 +14,8 @@
   },
   "Desktop": {
     "close": "Close window",
-    "skip": "Skip"
+    "skip": "Skip",
+    "home": "Show desktop"
   },
   "Hero": {
     "typewriter": [
