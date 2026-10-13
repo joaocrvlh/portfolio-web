@@ -1,19 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { Github, Globe, Smartphone, FolderGit2 } from "lucide-react";
+import { ArrowUpRight, Github, Globe, Smartphone, FolderGit2 } from "lucide-react";
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 interface ProjectProps {
   title: string;
@@ -25,7 +18,15 @@ interface ProjectProps {
   type?: "Mobile" | "Web" | "Research";
   codeLabel?: string;
   deployLabel?: string;
+  delay?: number;
 }
+
+const tagTones = [
+  "bg-foreground text-background",
+  "bg-secondary text-secondary-foreground",
+  "bg-background text-foreground",
+  "bg-accent text-accent-foreground",
+];
 
 export function ProjectCard({
   title,
@@ -37,6 +38,7 @@ export function ProjectCard({
   type = "Web",
   codeLabel = "Code",
   deployLabel,
+  delay = 0,
 }: ProjectProps) {
   const TypeIcon = {
     Mobile: Smartphone,
@@ -55,10 +57,13 @@ export function ProjectCard({
   }, [images.length]);
 
   return (
-    <Card className="group overflow-hidden border-muted-foreground/20 hover:border-primary/50 transition-all duration-300 hover:shadow-lg flex flex-col h-full">
-      <div
-        className={`relative w-full overflow-hidden bg-muted ${"aspect-video"}`}
-      >
+    <motion.article
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", stiffness: 260, damping: 24, delay }}
+      className="flex h-full flex-col gap-4 rounded-3xl border-2 bg-background p-3 shadow-retro transition-[translate,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-retro-lg"
+    >
+      <div className="relative aspect-video w-full overflow-hidden rounded-2xl border-2 bg-muted">
         {images.length > 0 ? (
           <>
             <div
@@ -78,19 +83,26 @@ export function ProjectCard({
                     src={src}
                     alt={`${title} ${i + 1}`}
                     fill
+                    sizes="(min-width: 768px) 576px, 100vw"
                     className="object-contain"
                   />
                 </div>
               ))}
             </div>
             {images.length > 1 && (
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
+              <div
+                aria-hidden
+                className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1.5 rounded-full border-2 bg-background px-2 py-1"
+              >
                 {images.map((_, i) => (
                   <span
                     key={i}
-                    className={`block h-1.5 rounded-full transition-all duration-300 ${
-                      i === currentIndex ? "w-4 bg-white" : "w-1.5 bg-white/50"
-                    }`}
+                    className={cn(
+                      "block h-1.5 rounded-full transition-all duration-300",
+                      i === currentIndex
+                        ? "w-4 bg-foreground"
+                        : "w-1.5 bg-muted-foreground/40",
+                    )}
                   />
                 ))}
               </div>
@@ -98,71 +110,56 @@ export function ProjectCard({
           </>
         ) : (
           <div className="flex h-full items-center justify-center text-muted-foreground">
-            <TypeIcon className="h-12 w-12 opacity-20" />
+            <TypeIcon className="size-12 opacity-30" />
           </div>
         )}
 
-        <div className="absolute top-2 right-2">
-          <Badge
-            variant="secondary"
-            className="backdrop-blur-md bg-background/80"
-          >
+        <div className="absolute top-2 left-2">
+          <Badge variant="secondary" className="shadow-retro-sm">
+            <TypeIcon />
             {type}
           </Badge>
         </div>
       </div>
 
-      <CardHeader>
-        <CardTitle className="text-xl flex items-center justify-between">
-          {title}
-        </CardTitle>
-        <CardDescription className="line-clamp-2">
+      <div className="flex flex-1 flex-col gap-3 px-2 pb-2">
+        <h3 className="text-xl leading-tight font-bold">{title}</h3>
+        <p className="text-sm leading-relaxed text-muted-foreground">
           {description}
-        </CardDescription>
-      </CardHeader>
+        </p>
 
-      <CardContent className="grow">
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <Badge key={tag} variant="outline" className="text-xs">
+        <div className="flex grow flex-wrap content-start gap-1.5">
+          {tags.map((tag, i) => (
+            <Badge key={tag} className={tagTones[i % tagTones.length]}>
               {tag}
             </Badge>
           ))}
         </div>
-      </CardContent>
 
-      <Separator className="bg-muted/50" />
+        {(githubUrl || deployUrl) && (
+          <div className="flex flex-wrap gap-3 pt-2">
+            {githubUrl && (
+              <Button variant="outline" size="sm" asChild>
+                <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+                  <Github /> {codeLabel}
+                </a>
+              </Button>
+            )}
 
-      <CardFooter className="pt-4">
-        <div className="flex flex-col gap-2 w-full">
-          {githubUrl && (
-            <Button
-              variant="outline"
-              size="sm"
-              className="w-full gap-2"
-              asChild
-            >
-              <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-                <Github className="h-4 w-4" /> {codeLabel}
-              </a>
-            </Button>
-          )}
-
-          {deployUrl && (
-            <Button size="sm" className="w-full gap-2" asChild>
-              <a href={deployUrl} target="_blank" rel="noopener noreferrer">
-                {type === "Mobile" ? (
-                  <Smartphone className="h-4 w-4" />
-                ) : (
-                  <Globe className="h-4 w-4" />
-                )}
-                {deployLabel ??
-                  (type === "Mobile" ? "APK / Demo" : "Live Demo")}
-              </a>
-            </Button>
-          )}
-        </div>
-      </CardFooter>
-    </Card>
+            {deployUrl && (
+              <Button size="sm" asChild>
+                <a href={deployUrl} target="_blank" rel="noopener noreferrer">
+                  {deployLabel ??
+                    (type === "Mobile" ? "APK / Demo" : "Live Demo")}
+                  <span className="flex size-5 items-center justify-center rounded-full border-2 bg-background text-foreground">
+                    <ArrowUpRight className="size-3" strokeWidth={3} />
+                  </span>
+                </a>
+              </Button>
+            )}
+          </div>
+        )}
+      </div>
+    </motion.article>
   );
 }
