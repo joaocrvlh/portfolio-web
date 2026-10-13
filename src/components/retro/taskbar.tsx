@@ -1,0 +1,113 @@
+"use client";
+
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Mail, type LucideIcon } from "lucide-react";
+import { LangSwitcher } from "@/components/lang-switcher";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Clock } from "@/components/retro/clock";
+import { socials } from "@/lib/links";
+import { cn } from "@/lib/utils";
+
+export interface TaskbarItem {
+  id: string;
+  label: string;
+  icon: LucideIcon;
+}
+
+interface TaskbarProps {
+  items: TaskbarItem[];
+  focusedId: string | null;
+  onSelect: (id: string) => void;
+}
+
+const dock = [
+  {
+    label: "LinkedIn",
+    href: socials.linkedin,
+    icon: Linkedin,
+    className: "bg-background text-foreground",
+    external: true,
+  },
+  {
+    label: "GitHub",
+    href: socials.github,
+    icon: Github,
+    className: "bg-foreground text-background",
+    external: true,
+  },
+  {
+    label: "Email",
+    href: socials.email,
+    icon: Mail,
+    className: "bg-secondary text-secondary-foreground",
+    external: false,
+  },
+];
+
+export function Taskbar({ items, focusedId, onSelect }: TaskbarProps) {
+  return (
+    <motion.div
+      initial={{ y: "100%" }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 260, damping: 28, delay: 0.2 }}
+      className="absolute inset-x-0 bottom-0 z-[900] flex h-(--taskbar) items-center justify-between gap-3 border-t-2 bg-background px-3 shadow-[0_-4px_0_0_var(--retro-shadow)] sm:grid sm:grid-cols-[1fr_auto_1fr] sm:px-6"
+    >
+      <div className="hidden min-w-0 items-center gap-2 overflow-hidden sm:flex">
+        <span className="mr-1 hidden shrink-0 items-center gap-2 2xl:flex">
+          <Image
+            src="/images/avatar.png"
+            alt=""
+            width={28}
+            height={28}
+            className="size-7 rounded-full border-2 object-cover"
+          />
+          <span className="font-mono text-xs font-bold">joaocrvlh.dev</span>
+        </span>
+        {items.map(({ id, label, icon: Icon }) => (
+          <button
+            key={id}
+            type="button"
+            onClick={() => onSelect(id)}
+            aria-pressed={focusedId === id}
+            className={cn(
+              "flex h-9 shrink-0 items-center gap-2 rounded-full border-2 px-3 text-xs font-bold transition-colors",
+              focusedId === id
+                ? "bg-foreground text-background"
+                : "bg-background hover:bg-accent",
+            )}
+          >
+            <Icon className="size-4" aria-hidden />
+            <span className="hidden 2xl:inline">{label}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="flex items-center gap-3 sm:gap-4">
+        {dock.map(({ label, href, icon: Icon, className, external }) => (
+          <motion.a
+            key={label}
+            href={href}
+            aria-label={label}
+            {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+            whileHover={{ y: -8, scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            className={cn(
+              "flex size-11 items-center justify-center rounded-2xl border-2 shadow-retro-sm sm:size-14",
+              className,
+            )}
+          >
+            <Icon className="size-5 sm:size-7" />
+          </motion.a>
+        ))}
+      </div>
+
+      <div className="flex items-center justify-end gap-1.5">
+        <Clock className="hidden md:inline-block" />
+        <LangSwitcher />
+        <ThemeToggle />
+      </div>
+    </motion.div>
+  );
+}
