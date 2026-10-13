@@ -53,7 +53,12 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <Button variant="outline" size="icon-sm" disabled>
+      <Button
+        variant="outline"
+        size="icon-sm"
+        className="size-10 sm:size-8"
+        disabled
+      >
         <Sun className="size-4" />
       </Button>
     );
@@ -63,6 +68,7 @@ export function ThemeToggle() {
     <Button
       variant="outline"
       size="icon-sm"
+      className="size-10 sm:size-8"
       onClick={toggleTheme}
       title="Alternar tema"
     >
