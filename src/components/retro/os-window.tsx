@@ -16,6 +16,7 @@ interface OsWindowProps {
   className?: string;
   barClassName?: string;
   bodyClassName?: string;
+  compact?: boolean;
   children: ReactNode;
 }
 
@@ -30,6 +31,7 @@ export function OsWindow({
   className,
   barClassName = "bg-secondary text-secondary-foreground",
   bodyClassName,
+  compact = false,
   children,
 }: OsWindowProps) {
   const controls = useDragControls();
@@ -52,26 +54,40 @@ export function OsWindow({
         role="dialog"
         aria-label={title}
         tabIndex={-1}
-        drag
+        drag={!compact}
         dragControls={controls}
         dragListener={false}
         dragMomentum={false}
         dragElastic={0}
         dragConstraints={constraintsRef}
-        initial={{ opacity: 0, scale: 0.9, x: offset.x, y: offset.y + 18 }}
-        animate={{ opacity: 1, scale: 1, y: offset.y }}
+        initial={
+          compact
+            ? { opacity: 0, scale: 1, x: 0, y: 40 }
+            : { opacity: 0, scale: 0.9, x: offset.x, y: offset.y + 18 }
+        }
+        animate={
+          compact
+            ? { opacity: 1, scale: 1, x: 0, y: 0 }
+            : { opacity: 1, scale: 1, y: offset.y }
+        }
         exit={{ opacity: 0, scale: 0.92, transition: { duration: 0.15 } }}
         transition={{ type: "spring", stiffness: 320, damping: 26 }}
         onPointerDown={onFocus}
         className={cn(
           "pointer-events-auto flex max-h-full flex-col overflow-hidden rounded-2xl sm:max-h-[calc(100%-3rem)] border-2 bg-background shadow-retro-lg outline-none",
           className,
+          compact && "size-full sm:max-h-full",
         )}
       >
         <div
-          onPointerDown={(e) => controls.start(e)}
+          onPointerDown={(e) => {
+            if (!compact) controls.start(e);
+          }}
           className={cn(
-            "flex h-10 shrink-0 cursor-grab touch-none items-center justify-between gap-3 border-b-2 pr-1.5 pl-4 select-none active:cursor-grabbing",
+            "flex shrink-0 items-center justify-between gap-3 border-b-2 pr-1.5 pl-4 select-none",
+            compact
+              ? "h-12"
+              : "h-10 cursor-grab touch-none active:cursor-grabbing",
             barClassName,
           )}
         >
@@ -81,14 +97,17 @@ export function OsWindow({
             aria-label={closeLabel}
             onPointerDown={(e) => e.stopPropagation()}
             onClick={onClose}
-            className="flex size-7 shrink-0 items-center justify-center rounded-full border-2 bg-background text-foreground transition-transform hover:bg-foreground hover:text-background active:scale-90"
+            className={cn(
+              "flex shrink-0 items-center justify-center rounded-full border-2 bg-background text-foreground transition-transform hover:bg-foreground hover:text-background active:scale-90",
+              compact ? "size-10" : "size-7",
+            )}
           >
             <X className="size-4" strokeWidth={3} aria-hidden />
           </button>
         </div>
         <div
           className={cn(
-            "min-h-0 flex-1 overflow-y-auto p-5 sm:p-7",
+            "min-h-0 flex-1 overflow-y-auto overscroll-contain p-5 sm:p-7",
             bodyClassName,
           )}
         >
