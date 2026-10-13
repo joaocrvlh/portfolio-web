@@ -25,6 +25,7 @@ import { ContactApp } from "@/components/apps/contact";
 import { TerminalApp } from "@/components/apps/terminal";
 import { GameApp } from "@/components/apps/game";
 import type { AppId, AppProps } from "@/lib/apps";
+import { COMPACT_QUERY, useCompact } from "@/lib/use-compact";
 
 const BOOT_KEY = "portfolio-booted";
 
@@ -124,10 +125,11 @@ export function Desktop() {
   const [windows, setWindows] = useState<OpenWindow[]>([]);
   const topZ = useRef(10);
   const areaRef = useRef<HTMLDivElement>(null);
+  const compact = useCompact();
 
   const openApp = useCallback((id: AppId, arg?: string) => {
     const z = ++topZ.current;
-    const wide = window.matchMedia("(min-width: 640px)").matches;
+    const wide = !window.matchMedia(COMPACT_QUERY).matches;
     setWindows((ws) =>
       ws.some((w) => w.id === id)
         ? ws.map((w) =>
@@ -224,10 +226,10 @@ export function Desktop() {
 
       {ready && (
         <>
-          <div className="absolute top-5 left-3 z-[5] flex flex-col gap-6 sm:top-10 sm:left-8 sm:gap-8">
+          <div className="absolute top-5 bottom-[calc(var(--taskbar)+1rem)] left-3 z-[5] flex flex-col flex-wrap content-start gap-x-3 gap-y-5 sm:top-10 sm:left-8 sm:gap-y-8">
             {renderIcons(leftIcons, 0.2)}
           </div>
-          <div className="absolute top-5 right-3 z-[5] flex flex-col gap-6 sm:top-10 sm:right-8 sm:gap-8">
+          <div className="absolute top-5 right-3 bottom-[calc(var(--taskbar)+1rem)] z-[5] flex flex-col flex-wrap-reverse content-start items-end gap-x-3 gap-y-5 sm:top-10 sm:right-8 sm:gap-y-8">
             {renderIcons(rightIcons, 0.35)}
           </div>
         </>
@@ -261,6 +263,7 @@ export function Desktop() {
                 className={app.width}
                 barClassName={app.bar}
                 bodyClassName={app.body}
+                compact={compact}
                 onFocus={() => openApp(w.id)}
                 onClose={() => closeApp(w.id)}
               >
@@ -280,6 +283,9 @@ export function Desktop() {
           }))}
           focusedId={focused?.id ?? null}
           onSelect={(id) => openApp(id as AppId)}
+          compact={compact}
+          onHome={() => setWindows([])}
+          homeLabel={t("home")}
         />
       )}
     </main>
