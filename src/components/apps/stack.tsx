@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { motion } from "framer-motion";
 import { AppHeading } from "@/components/apps/app-heading";
 
 export const stackCategories = [
@@ -71,20 +70,6 @@ export const stackCategories = [
   },
 ];
 
-const tiles = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.04, delayChildren: 0.15 } },
-};
-
-const tile = {
-  hidden: { opacity: 0, scale: 0.6 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    transition: { type: "spring" as const, stiffness: 400, damping: 22 },
-  },
-};
-
 const headerTones = [
   "bg-foreground text-background",
   "bg-secondary text-secondary-foreground",
@@ -105,20 +90,14 @@ function StackPanel({
         {title}
       </h3>
 
-      <motion.ul
-        variants={tiles}
-        initial="hidden"
-        animate="show"
-        className="grid grid-cols-[repeat(auto-fill,minmax(4.5rem,1fr))] gap-3 p-4"
-      >
-        {items.map((tech) => (
-          <motion.li
+      <ul className="grid grid-cols-[repeat(auto-fill,minmax(4.5rem,1fr))] gap-3 p-4">
+        {items.map((tech, i) => (
+          <li
             key={tech.name}
-            variants={tile}
-            whileHover={{ y: -3 }}
-            className="group flex flex-col items-center gap-2 text-center"
+            style={{ animationDelay: `${150 + i * 40}ms` }}
+            className="group animate-pop-in flex flex-col items-center gap-2 text-center"
           >
-            <span className="flex size-14 items-center justify-center rounded-2xl border-2 bg-background p-2.5 shadow-retro-sm transition-colors group-hover:bg-accent">
+            <span className="flex size-14 items-center justify-center rounded-2xl border-2 bg-background p-2.5 shadow-retro-sm transition-[translate,background-color] group-hover:-translate-y-[3px] group-hover:bg-accent">
               <Image
                 src={`/images/stacks/${tech.slug}.svg`}
                 alt=""
@@ -130,9 +109,9 @@ function StackPanel({
             <span className="text-[11px] leading-tight font-semibold">
               {tech.name}
             </span>
-          </motion.li>
+          </li>
         ))}
-      </motion.ul>
+      </ul>
     </div>
   );
 }
