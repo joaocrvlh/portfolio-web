@@ -121,6 +121,7 @@ interface OpenWindow {
   arg?: string;
   z: number;
   offset: { x: number; y: number };
+  closing?: boolean;
 }
 
 export function Desktop() {
@@ -139,9 +140,12 @@ export function Desktop() {
       const existing = ws.find((w) => w.id === id);
       if (existing) {
         const onTop = ws.every((w) => w.z <= existing.z);
-        if (onTop && (arg === undefined || arg === existing.arg)) return ws;
+        const sameArg = arg === undefined || arg === existing.arg;
+        if (onTop && sameArg && !existing.closing) return ws;
         return ws.map((w) =>
-          w.id === id ? { ...w, z, ...(arg !== undefined && { arg }) } : w,
+          w.id === id
+            ? { ...w, z, closing: false, ...(arg !== undefined && { arg }) }
+            : w,
         );
       }
       return [
@@ -158,9 +162,26 @@ export function Desktop() {
     });
   }, []);
 
-  const closeApp = useCallback((id: AppId) => {
-    setWindows((ws) => ws.filter((w) => w.id !== id));
+  const removeClosed = useCallback((id?: AppId) => {
+    setWindows((ws) =>
+      ws.filter((w) => !(w.closing && (id === undefined || w.id === id))),
+    );
   }, []);
+
+  const closeApp = useCallback(
+    (id: AppId) => {
+      setWindows((ws) =>
+        ws.map((w) => (w.id === id ? { ...w, closing: true } : w)),
+      );
+      setTimeout(() => removeClosed(id), 500);
+    },
+    [removeClosed],
+  );
+
+  const closeAll = useCallback(() => {
+    setWindows((ws) => ws.map((w) => ({ ...w, closing: true })));
+    setTimeout(() => removeClosed(), 500);
+  }, [removeClosed]);
 
   const finishBoot = useCallback(() => {
     try {
@@ -187,8 +208,9 @@ export function Desktop() {
     return () => clearTimeout(id);
   }, [openApp]);
 
-  const focused = windows.length
-    ? windows.reduce((a, b) => (b.z > a.z ? b : a))
+  const visible = windows.filter((w) => !w.closing);
+  const focused = visible.length
+    ? visible.reduce((a, b) => (b.z > a.z ? b : a))
     : null;
 
   useEffect(() => {
@@ -202,7 +224,7 @@ export function Desktop() {
 
   const ready = phase === "ready";
   useIdlePreload(PRELOAD_ICONS, ready);
-  const openIds = new Set(windows.map((w) => w.id));
+  const openIds = new Set(visible.map((w) => w.id));
 
   const renderIcons = (ids: AppId[], baseDelay: number) =>
     ids.map((id, i) => {
@@ -224,14 +246,14 @@ export function Desktop() {
     <main className="fixed inset-0 overflow-hidden">
       <div className="pointer-events-none absolute inset-x-0 top-0 bottom-(--taskbar) flex flex-col items-center justify-center px-24 sm:px-32">
         
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={ready ? { opacity: 1 } : undefined}
-          transition={{ delay: 0.7 }}
-          className="mt-3 font-mono text-xs font-bold tracking-[0.3em] text-wordmark uppercase sm:text-sm"
-        >
-          joaocrvlh.dev
-        </motion.p>
+        {ready && (
+          <p
+            style={{ animationDelay: "0.7s" }}
+            className="animate-rise-in mt-3 font-mono text-xs font-bold tracking-[0.3em] text-wordmark uppercase sm:text-sm"
+          >
+            joaocrvlh.dev
+          </p>
+        )}
       </div>
 
       {ready && (
@@ -260,33 +282,35 @@ export function Desktop() {
               <BootWindow onDone={finishBoot} />
             </motion.div>
           )}
-          {windows.map((w) => {
-            const app = apps[w.id];
-            return (
-              <OsWindow
-                key={w.id}
-                title={`C:\\JOAO\\${app.path}`}
-                closeLabel={t("close")}
-                zIndex={w.z}
-                offset={w.offset}
-                constraintsRef={areaRef}
-                className={app.width}
-                barClassName={app.bar}
-                bodyClassName={app.body}
-                compact={compact}
-                onFocus={() => openApp(w.id)}
-                onClose={() => closeApp(w.id)}
-              >
-                <app.Content onOpen={openApp} arg={w.arg} />
-              </OsWindow>
-            );
-          })}
         </AnimatePresence>
+        {windows.map((w) => {
+          const app = apps[w.id];
+          return (
+            <OsWindow
+              key={w.id}
+              title={`C:\\JOAO\\${app.path}`}
+              closeLabel={t("close")}
+              zIndex={w.z}
+              offset={w.offset}
+              constraintsRef={areaRef}
+              className={app.width}
+              barClassName={app.bar}
+              bodyClassName={app.body}
+              compact={compact}
+              onFocus={() => openApp(w.id)}
+              closing={w.closing}
+              onClose={() => closeApp(w.id)}
+              onClosed={() => removeClosed(w.id)}
+            >
+              <app.Content onOpen={openApp} arg={w.arg} />
+            </OsWindow>
+          );
+        })}
       </div>
 
       {ready && (
         <Taskbar
-          items={windows.map((w) => ({
+          items={visible.map((w) => ({
             id: w.id,
             label: tNav(apps[w.id].label),
             icon: apps[w.id].icon,
@@ -294,7 +318,7 @@ export function Desktop() {
           focusedId={focused?.id ?? null}
           onSelect={(id) => openApp(id as AppId)}
           compact={compact}
-          onHome={() => setWindows([])}
+          onHome={closeAll}
           homeLabel={t("home")}
         />
       )}
