@@ -233,7 +233,7 @@ export function TerminalApp({ onOpen }: AppProps) {
     <div
       ref={scrollRef}
       onClick={() => inputRef.current?.focus({ preventScroll: true })}
-      className="h-[min(28rem,60dvh)] cursor-text overflow-y-auto bg-black p-4 font-mono text-[13px] leading-relaxed text-neutral-100 sm:text-sm"
+      className="h-[min(28rem,60dvh)] cursor-text overscroll-contain max-sm:h-full overflow-y-auto bg-black p-4 font-mono text-[13px] leading-relaxed text-neutral-100 sm:text-sm"
     >
       {lines.map((line) => (
         <p key={line.id} className="break-words whitespace-pre-wrap">
@@ -259,7 +259,7 @@ export function TerminalApp({ onOpen }: AppProps) {
           autoCorrect="off"
           spellCheck={false}
           aria-label="terminal"
-          className="min-w-0 flex-1 bg-transparent text-neutral-100 caret-white outline-none"
+          className="min-w-0 flex-1 bg-transparent text-base text-neutral-100 caret-white outline-none sm:text-sm"
         />
       </label>
     </div>
