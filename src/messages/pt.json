@@ -14,7 +14,8 @@
   },
   "Desktop": {
     "close": "Fechar janela",
-    "skip": "Pular"
+    "skip": "Pular",
+    "home": "Mostrar área de trabalho"
   },
   "Hero": {
     "typewriter": [
