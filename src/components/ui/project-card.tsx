@@ -139,7 +139,7 @@ export function ProjectCard({
         {(githubUrl || deployUrl) && (
           <div className="flex flex-wrap gap-3 pt-2">
             {githubUrl && (
-              <Button variant="outline" size="sm" asChild>
+              <Button variant="outline" size="sm" className="max-sm:h-10" asChild>
                 <a href={githubUrl} target="_blank" rel="noopener noreferrer">
                   <Github /> {codeLabel}
                 </a>
@@ -147,7 +147,7 @@ export function ProjectCard({
             )}
 
             {deployUrl && (
-              <Button size="sm" asChild>
+              <Button size="sm" className="max-sm:h-10" asChild>
                 <a href={deployUrl} target="_blank" rel="noopener noreferrer">
                   {deployLabel ??
                     (type === "Mobile" ? "APK / Demo" : "Live Demo")}
