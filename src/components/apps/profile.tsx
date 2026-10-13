@@ -86,7 +86,7 @@ export function ProfileApp() {
 
       <div className="space-y-3">
         <AppHeading as="h3">{tAbout("title")}</AppHeading>
-        <p className="leading-relaxed text-justify text-foreground/90 sm:text-left">
+        <p className="leading-relaxed text-foreground/90">
           {tAbout("description1")}
         </p>
       </div>
