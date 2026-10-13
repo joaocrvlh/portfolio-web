@@ -94,7 +94,7 @@
 
 :root {
   --radius: 1rem;
-  --taskbar: 4.75rem;
+  --taskbar: calc(4.75rem + env(safe-area-inset-bottom));
 
   --desktop: #ffffff;
   --wordmark: #000000;
@@ -171,6 +171,7 @@
   body {
     height: 100%;
     overflow: hidden;
+    overscroll-behavior: none;
   }
   html {
     cursor: var(--cursor-arrow);
@@ -245,6 +246,15 @@ html {
 }
 ::view-transition-new(root) {
   z-index: 2147483646;
+}
+
+@media (pointer: coarse) {
+  .grain {
+    display: none;
+  }
+  .animate-drift {
+    animation: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
