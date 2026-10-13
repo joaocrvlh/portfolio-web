@@ -1,12 +1,23 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins, Space_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { ThemeProvider } from "@/components/theme-provider";
+import { MotionProvider } from "@/components/motion-provider";
+import { DesktopBackground } from "@/components/retro/desktop-background";
 import "../globals.css";
-import { Navbar } from "@/components/navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  variable: "--font-space-mono",
+  weight: ["400", "700"],
+});
 
 type Props = {
   children: React.ReactNode;
@@ -32,7 +43,7 @@ export default async function RootLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${poppins.variable} ${spaceMono.variable}`}>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"
@@ -40,12 +51,10 @@ export default async function RootLayout({ children, params }: Props) {
             enableSystem
             disableTransitionOnChange
           >
-            <div className="flex w-full justify-center min-h-screen bg-background">
-              <div className="w-full max-w-7xl px-4 md:px-8">
-                <Navbar />
-                {children}
-              </div>
-            </div>
+            <MotionProvider>
+              <DesktopBackground />
+              {children}
+            </MotionProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
